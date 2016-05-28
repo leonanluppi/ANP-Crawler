@@ -2,7 +2,8 @@
 
 let CityPostgres = (sequelize, DataTypes) => {
   return sequelize.define('city', {
-    name: DataTypes.STRING
+    name     : DataTypes.STRING,
+    county_id: DataTypes.STRING
   });
 };
 
