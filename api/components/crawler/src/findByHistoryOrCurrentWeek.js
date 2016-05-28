@@ -34,6 +34,7 @@ let ComponentAction  = (() => {
     let Tasks = [];
     let Data  = {};
 
+    // Just request to capture params
     Tasks.push(function requestParams(doNext) {
       RequestAdapter.build('GET', 'http://www.anp.gov.br/preco/prc/Resumo_Por_Estado_Index.asp', null,
       (err, response, body) => {
@@ -47,6 +48,7 @@ let ComponentAction  = (() => {
       });
     });
 
+    // Get all params to use in Crawler request
     Tasks.push(function getParams(status, body, doNext) {
       if (!status) {
         return doNext(null, false);
@@ -70,7 +72,8 @@ let ComponentAction  = (() => {
       return doNext(null, true);
     });
 
-    Tasks.push(function checkCurrentWeek(status, doNext) {
+    // Verify if data already exists
+    Tasks.push(function checkAlreadyDataExists(status, doNext) {
       if (!status) {
         return doNext(null, false);
       }

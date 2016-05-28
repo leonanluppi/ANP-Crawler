@@ -86,6 +86,7 @@ let ComponentAction  = (() => {
       });
     });
 
+    // Get all stations the add to schema
     Tasks.push(function getStationsFromState(status, stateData, doNext) {
       if (!status) {
         console.log('passou 1')
@@ -148,6 +149,7 @@ let ComponentAction  = (() => {
 
     });
 
+    // Update in MongoDb if necessary
     Tasks.push(function updateMongo(status, stateData, doNext) {
       if (!status) {
         console.log('passou 2', stateData.name)
