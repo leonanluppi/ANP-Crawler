@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="row"
+       data-ng-if="station_vm.crawlerGetting">
+    <div class="container-fluid">
+      <h4 data-ng-bind="::station_vm.translations.labelSearching"></h4>
+    </div>
+  </div>
+
+  <div class="row"
+       data-ng-repeat="city in station_vm.stations.cities track by city.name"
+       data-ng-if="!station_vm.crawlerGetting">
+    <div class="container-fluid no-gutter"
+         data-ng-repeat="station in city.stations track by $index">
+
+      <h3 data-ng-bind="station_vm.stations.name"></h2>
+
+      <div class="col-xs-12 large-divider">
+        <h4 class="title"
+            data-ng-bind="::station.prices[0].type"></h4>
+      </div>
+      <div class="col-xs-12">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th data-ng-bind="::station_vm.translations.table.companyName"></th>
+              <th data-ng-bind="::station_vm.translations.table.address"></th>
+              <th data-ng-bind="::station_vm.translations.table.area"></th>
+              <th data-ng-bind="::station_vm.translations.table.flag"></th>
+              <th data-ng-bind="::station_vm.translations.table.sellPrice"></th>
+              <th data-ng-bind="::station_vm.translations.table.buyPrice"></th>
+              <th data-ng-bind="::station_vm.translations.table.saleMode"></th>
+              <th data-ng-bind="::station_vm.translations.table.provider"></th>
+              <th data-ng-bind="::station_vm.translations.table.date"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a href
+                   data-ng-bind="::city.name">
+                </a>
+              </td>
+              <td data-ng-bind="::station.name"></td>
+              <td data-ng-bind="::station.address"></td>
+              <td data-ng-bind="::station.area"></td>
+              <td data-ng-bind="::station.flag"></td>
+              <td data-ng-bind="::station.prices[0].sellPrice"></td>
+              <td data-ng-bind="::station.prices[0].buyPrice"></td>
+              <td data-ng-bind="::station.prices[0].saleMode"></td>
+              <td data-ng-bind="::station.prices[0].provider"></td>
+              <td data-ng-bind="::station.prices[0].date"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

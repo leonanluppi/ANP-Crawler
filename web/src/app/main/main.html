@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="container-fluid text-center">
+      <form>
+        <div class="form-group">
+          <label class="col-md-2 control-label"
+                 data-ng-bind="::main_vm.translations.labelSelectState"></label>
+          <div class="col-md-7">
+            <select class="form-control"
+                    data-ng-model="main_vm.stateSelectData.selectedOption"
+                    data-ng-options="option.name for option in main_vm.stateSelectData.availableOptions track by option.id">
+            </select>
+          </div>
+          <div class="col-md-2 pull-right">
+            <button class="btn btn-primary btn-raised btn-block"
+                    data-ng-click="main_vm.checkState(main_vm.stateSelectData.selectedOption)"
+                    data-ng-disabled="main_vm.isDisabledSearchButton(main_vm.stateSelectData.selectedOption)"
+                    data-ng-bind="::main_vm.translations.buttonSearch">
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row"
+       data-ng-if="!main_vm.history.cities.length && !main_vm.crawlerGetting">
+    <div class="container-fluid text-center">
+      <h4 data-ng-bind="::main_vm.translations.selectAState"></h4>
+    </div>
+  </div>
+  <div class="row"
+       data-ng-repeat="city in main_vm.history.cities track by city.name"
+       data-ng-if="!main_vm.crawlerGetting">
+    <div class="container-fluid no-gutter"
+         data-ng-repeat="statistic in city.statistics track by statistic.type">
+      <div class="col-xs-12 large-divider">
+        <h4 class="title"
+            data-ng-bind="::statistic.type"></h4>
+      </div>
+      <div class="col-xs-12">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th data-ng-bind="::main_vm.translations.table.labelCounty"></th>
+              <th data-ng-bind="::main_vm.translations.table.averageMargin"></th>
+              <th data-ng-bind="::main_vm.translations.table.standardDeviation"></th>
+              <th data-ng-bind="::main_vm.translations.table.minPrice"></th>
+              <th data-ng-bind="::main_vm.translations.table.maxPrice"></th>
+              <th data-ng-bind="::main_vm.translations.table.averageMargin"></th>
+              <th data-ng-bind="::main_vm.translations.table.averagePrice"></th>
+              <th data-ng-bind="::main_vm.translations.table.standardDeviation"></th>
+              <th data-ng-bind="::main_vm.translations.table.minPrice"></th>
+              <th data-ng-bind="::main_vm.translations.table.maxPrice"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a href
+                   data-ui-sref="softruck.station({ city: city.county_id })"
+                   data-ng-bind="::city.name">
+                </a>
+              </td>
+              <td data-ng-bind="::statistic.consumerPrice[0].averagePrice"></td>
+              <td data-ng-bind="::statistic.consumerPrice[0].standardDeviation"></td>
+              <td data-ng-bind="::statistic.consumerPrice[0].minPrice"></td>
+              <td data-ng-bind="::statistic.consumerPrice[0].maxPrice"></td>
+              <td data-ng-bind="::statistic.consumerPrice[0].averageMargin"></td>
+              <td data-ng-bind="::statistic.distributionPrice[0].averagePrice"></td>
+              <td data-ng-bind="::statistic.distributionPrice[0].standardDeviation"></td>
+              <td data-ng-bind="::statistic.distributionPrice[0].minPrice"></td>
+              <td data-ng-bind="::statistic.distributionPrice[0].maxPrice"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"
+       data-ng-if="main_vm.crawlerGetting">
+    <div class="container-fluid">
+      <h4 data-ng-bind="::main_vm.translations.labelSearching"></h4>
+    </div>
+  </div>
+</div>
